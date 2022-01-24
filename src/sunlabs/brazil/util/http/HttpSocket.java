@@ -112,6 +112,32 @@ public class HttpSocket
     void
     close()
     {
+	
+		/* ********OpenRefactory Warning********
+		 Potential data race detected!
+		
+		The data access in 
+		in=null
+		may have race with 3 other accesses.
+		
+		The mentioned access is performed in a thread spawned by 
+		new BackgroundCloser(tmp,under,DRAIN_TIMEOUT).start()
+		in file, HttpRequest.java.
+		
+		It may have contending concurrent access 
+		
+		1. in file, HttpRequest.java, class HttpRequest, method readStatusLine, 
+		
+		hs.in=pin
+		
+		2. in file, HttpRequest.java, class LimitInputStream, method LimitInputStream, 
+		
+		super(target.hs.in);
+		
+		
+		3. with itself 
+		
+		*/
 	in = null;
 	out = null;
 
